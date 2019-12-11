@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        Hello {{ msg }} <br>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Vue.js'
+            },
+            //实例创建之前调用的钩子函数  数据和模板均为获取到
+            beforeCreate() {
+                console.log('beforeCreate ', this.$el, this.data)
+            },
+
+            //实例创建之后调用的钩子函数  数据获取到了 但模板还未获取到 (获取到数据最早的钩子函数)
+            //ajax一般在
+            created() {
+                console.log('created ', this.$el, this.data)
+            },
+            //数据挂载之前的钩子函数   模板获取到了 但是数据还未挂载到模板上
+            beforeMount() {
+                console.log('beforeMount ', this.$el, this.data)
+            },
+            //数据挂载之后的钩子函数    数据已经挂载到模板上了
+            mounted() {
+                console.log('mounted ', this.$el, this.data)
+            },
+            //数据更新之前的钩子函数
+            beforeUpdate() {
+                console.log('beforeUpdate ', this.$el.innerHTML)
+            },
+            //数据更新之后的钩子函数
+            updated() {
+                console.log('updated ', this.$el.innerHTML)
+            },
+            //VUE实例销毁之前的钩子函数
+            beforeDestroy() {
+                console.log('beforeDestroy ')
+            },
+            //VUE实例销毁之前的钩子函数
+            destroyed() {
+                console.log('destroyed')
+            },
+
+        })
+        //销毁Vue实例
+       // vm.$destroy()
+    </script>
+</body>
+
+</html>
